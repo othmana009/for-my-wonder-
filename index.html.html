@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#17152b" />
+  <title>A little letter for Jana ✨</title>
+  <style>
+    :root {
+      --night: #17152b;
+      --pink: #ffb6cf;
+      --cream: #fff4e9;
+      --ink: #493344;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; overflow-x: hidden;
+      display: grid; place-items: center;
+      color: var(--cream);
+      font-family: Georgia, "Times New Roman", serif;
+      background:
+        radial-gradient(circle at 50% 15%, #39305c 0, transparent 34%),
+        radial-gradient(circle at 15% 85%, #332044 0, transparent 30%),
+        linear-gradient(160deg, #111326, var(--night) 55%, #24172f);
+    }
+    .stars, .stars::before, .stars::after {
+      position: fixed; inset: 0; pointer-events: none; content: "";
+      background-image:
+        radial-gradient(2px 2px at 8% 18%, #fff 98%, transparent),
+        radial-gradient(1px 1px at 22% 72%, #ffd8e7 98%, transparent),
+        radial-gradient(2px 2px at 78% 20%, #fff 98%, transparent),
+        radial-gradient(1px 1px at 88% 65%, #fff 98%, transparent),
+        radial-gradient(1px 1px at 52% 8%, #ffd8e7 98%, transparent),
+        radial-gradient(2px 2px at 64% 86%, #fff 98%, transparent),
+        radial-gradient(1px 1px at 35% 34%, #fff 98%, transparent);
+      opacity: .75; animation: twinkle 4s ease-in-out infinite alternate;
+    }
+    .stars::before { transform: translate(12px, 20px); opacity: .45; animation-delay: -2s; }
+    .stars::after { transform: translate(-15px, -12px); opacity: .35; animation-delay: -1s; }
+    @keyframes twinkle { from { opacity: .25; } to { opacity: .9; } }
+    .wrap { width: min(92vw, 540px); text-align: center; padding: 36px 12px 48px; position: relative; z-index: 1; }
+    .tiny { color: #e7bfd2; letter-spacing: .22em; text-transform: uppercase; font: 11px/1.5 Arial, sans-serif; }
+    h1 { font-size: clamp(35px, 8vw, 56px); font-weight: 400; margin: 12px 0 8px; }
+    h1 span { color: var(--pink); font-style: italic; }
+    .hint { color: #e6d5e0; font: 14px/1.6 Arial, sans-serif; margin: 0 auto 24px; }
+    .scene { position: relative; height: 330px; display: grid; place-items: center; }
+    .glow { position: absolute; width: 240px; height: 170px; border-radius: 50%; background: #f28bb7; filter: blur(65px); opacity: .17; }
+    .cat {
+      position: absolute; top: 5px; font-size: 84px; z-index: 3;
+      filter: drop-shadow(0 8px 14px #09081788);
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float { 0%,100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-10px) rotate(3deg); } }
+    .envelope-button {
+      position: absolute; top: 126px; width: 248px; height: 164px;
+      border: 0; padding: 0; cursor: pointer; background: transparent;
+      filter: drop-shadow(0 18px 20px #09081777); transition: transform .25s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .envelope-button:hover { transform: translateY(-5px) scale(1.025); }
+    .envelope {
+      position: absolute; inset: 0; overflow: hidden; border-radius: 8px;
+      background: #f6c6d5; border: 1px solid #ffe3ed;
+    }
+    .envelope::before {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(135deg, #f8d7df, #eaa5bc);
+      clip-path: polygon(0 0, 50% 56%, 100% 0);
+      z-index: 2; transform-origin: top; transition: transform .7s ease;
+    }
+    .envelope::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(35deg, #d987a6, #f1b4c9);
+      clip-path: polygon(0 100%, 0 0, 50% 55%, 100% 0, 100% 100%);
+      z-index: 1;
+    }
+    .seal {
+      position: absolute; z-index: 4; left: 50%; top: 55%; transform: translate(-50%,-50%);
+      width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center;
+      color: #fff4f7; background: #bd5e83; font-size: 20px;
+      box-shadow: 0 2px 7px #8c3f5c55; transition: opacity .3s;
+    }
+    .letter {
+      position: absolute; z-index: 2; left: 13px; right: 13px; bottom: 12px; height: 132px;
+      border-radius: 5px; background: var(--cream); color: var(--ink);
+      display: grid; place-items: start center; padding-top: 20px;
+      transition: transform .8s cubic-bezier(.2,.8,.2,1);
+    }
+    .letter small { font: 11px Arial, sans-serif; color: #a15e7b; letter-spacing: .12em; }
+    .opened .envelope::before { transform: rotateX(180deg); z-index: 0; }
+    .opened .letter { transform: translateY(-112px); }
+    .opened .seal { opacity: 0; }
+    .opened .cat { animation: happy .55s ease-in-out 2; }
+    @keyframes happy { 50% { transform: translateY(-18px) rotate(8deg) scale(1.08); } }
+    .tap { position: absolute; bottom: 0; font: 12px Arial, sans-serif; color: #e9c8d8; letter-spacing: .12em; }
+    .message {
+      display: none; margin: 4px auto 0; padding: 26px 24px 24px;
+      max-width: 440px; color: var(--ink); text-align: left;
+      background: linear-gradient(145deg, #fff8f0, #ffe8ef);
+      border: 1px solid #fff; border-radius: 12px;
+      box-shadow: 0 18px 50px #09081766;
+      animation: appear .8s ease both;
+    }
+    .message.show { display: block; }
+    @keyframes appear { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+    .message .to { color: #a45c7c; font: 11px Arial, sans-serif; letter-spacing: .16em; text-transform: uppercase; }
+    .message h2 { margin: 10px 0 14px; font-size: 27px; font-weight: 400; }
+    .message p { font-size: 16px; line-height: 1.75; margin: 0 0 12px; }
+    .signature { text-align: right; color: #a45c7c; font-style: italic; margin-top: 20px !important; }
+    .again { display: block; margin: 18px auto 0; border: 1px solid #e6afc4; color: #ffe7f0; background: #ffffff12; border-radius: 30px; padding: 10px 17px; cursor: pointer; font: 12px Arial, sans-serif; }
+    .footer { color: #bba9c0; font: 11px Arial, sans-serif; margin-top: 24px; }
+    @media (max-width: 420px) { .scene { height: 310px; } .envelope-button { transform: scale(.92); } .envelope-button:hover { transform: translateY(-5px) scale(.94); } .message { padding: 22px 19px; } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div>
+  <main class="wrap">
+    <div class="tiny">a tiny surprise, made just for you</div>
+    <h1>For <span>jana✨</span></h1>
+    <p class="hint">Some little things are better when you open them…</p>
+
+    <section class="scene" id="scene" aria-label="A cat sitting above a sealed letter">
+      <div class="glow"></div>
+      <div class="cat" aria-hidden="true">🐱</div>
+      <button class="envelope-button" id="openLetter" aria-label="Open the letter">
+        <div class="envelope">
+          <div class="letter"><small>JUST FOR YOU ✦</small></div>
+          <div class="seal">♥</div>
+        </div>
+      </button>
+      <div class="tap" id="tapText">TAP THE ENVELOPE TO OPEN</div>
+    </section>
+
+    <article class="message" id="message">
+      <div class="to">A little note for you</div>
+      <h2>Dear Jana,</h2>
+      <p>I just wanted to remind you how special you are to me. You have a way of making ordinary moments feel a little brighter, and even the smallest things can make me think of you.</p>
+      <p>I hope this little surprise makes you smile, because you deserve all the happiness and all the beautiful things life can bring.</p>
+      <p>Keep being your lovely self. ✨</p>
+      <p class="signature">With lots of care, ♥</p>
+    </article>
+
+    <button class="again" id="again" hidden>Read it again ↻</button>
+    <div class="footer">made with a little bit of stardust ✦</div>
+  </main>
+  <script>
+    const scene = document.getElementById('scene');
+    const openButton = document.getElementById('openLetter');
+    const message = document.getElementById('message');
+    const tapText = document.getElementById('tapText');
+    const again = document.getElementById('again');
+
+    function openLetter() {
+      scene.classList.add('opened');
+      tapText.textContent = 'A LITTLE NOTE FOR YOU…';
+      openButton.disabled = true;
+      window.setTimeout(() => {
+        message.classList.add('show');
+        again.hidden = false;
+        message.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 850);
+    }
+    openButton.addEventListener('click', openLetter);
+    again.addEventListener('click', () => {
+      message.classList.remove('show');
+      scene.classList.remove('opened');
+      tapText.textContent = 'TAP THE ENVELOPE TO OPEN';
+      openButton.disabled = false;
+      again.hidden = true;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
